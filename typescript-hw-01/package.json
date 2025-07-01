@@ -2,7 +2,7 @@
   "name": "typescript-hw-01",
   "version": "1.0.0",
   "description": "<!-- компіляцію ts в js консолі за допомогою команди: -->",
-  "main": "test.js",
+  "main": "index.js",
   "scripts": {
     "start": "web-dev-server --node-resolve --open --watch"
   },
