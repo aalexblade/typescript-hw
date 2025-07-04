@@ -3,6 +3,6 @@
   І так само визначте змінну, яка може приймати тільки одне з двох рядкових значень: 'enable' або 'disable' (literal type)?
 */
 
-let literal: 'enable' | 'disable';
-literal = 'enable';  // Це дозволено
-literal = 'disable'; 
+let literal: "enable" | "disable";
+literal = "enable";
+literal = "disable";
