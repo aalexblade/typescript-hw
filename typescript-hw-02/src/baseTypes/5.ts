@@ -12,3 +12,7 @@
 let literal: "enable" | "disable";
 literal = "enable";
 literal = "disable";
+
+let person = ['Max', 21];
+
+export{}
