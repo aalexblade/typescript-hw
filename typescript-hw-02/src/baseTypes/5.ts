@@ -3,16 +3,8 @@
   І так само визначте змінну, яка може приймати тільки одне з двох рядкових значень: 'enable' або 'disable' (literal type)?
 */
 
-// let literal: "enable" | "disable";
-// literal = "enable";
-// literal = "disable";
-
-
-
 let literal: "enable" | "disable";
 literal = "enable";
 literal = "disable";
-
-let person = ['Max', 21];
 
 export{}
