@@ -1,8 +1,8 @@
 // Index Properties
 
-type Goods = {
-  [key: string]: number;
-};
+// type Goods = {
+//   [key: string]: number;
+// };
 
 // type Fruits = {
 //   apples: number;
@@ -16,17 +16,17 @@ type Goods = {
 //   berry: number; 
 // };
 
-const fruits: Goods = {
-  apples: 15,
-  banana: 30,
-  orange: 30,
-};
+// const fruits: Goods = {
+//   apples: 15,
+//   banana: 30,
+//   orange: 30,
+// };
 
-const frozenGoods: Goods = {
-  iceCream: 25,
-  fish: 30,
-  berry: 10,
-};
+// const frozenGoods: Goods = {
+//   iceCream: 25,
+//   fish: 30,
+//   berry: 10,
+// };
 
 // const myDict: StringDictionary = {
 //   prop1: "value1",
@@ -59,20 +59,20 @@ const frozenGoods: Goods = {
 // Визначте інтерфейс для об'єкта, де ключем є рядок, а значенням може бути або рядок, або число.
 // Створіть декілька об'єктів цього типу.
 
-// type MixedType = {
-//   [key: string]: string | number;
-// };
+type MixedType = {
+  [key: string]: string | number;
+};
 
-// const userInfo: MixedType = {
-//   name: "Bob",
-//   age: 23,
-//   country: "Ukraine",
-// };
+const userInfo: MixedType = {
+  name: "Bob",
+  age: 23,
+  country: "Ukraine",
+};
 
-// const bookDetails: MixedType = {
-//   title: "Bible",
-//   pageCount: 350,
-// };
+const bookDetails: MixedType = {
+  title: "Bible",
+  pageCount: 350,
+};
 
 // Generics
 
