@@ -59,20 +59,20 @@
 // Визначте інтерфейс для об'єкта, де ключем є рядок, а значенням може бути або рядок, або число.
 // Створіть декілька об'єктів цього типу.
 
-type MixedType = {
-  [key: string]: string | number;
-};
+// type MixedType = {
+//   [key: string]: string | number;
+// };
 
-const userInfo: MixedType = {
-  name: "Bob",
-  age: 23,
-  country: "Ukraine",
-};
+// const userInfo: MixedType = {
+//   name: "Bob",
+//   age: 23,
+//   country: "Ukraine",
+// };
 
-const bookDetails: MixedType = {
-  title: "Bible",
-  pageCount: 350,
-};
+// const bookDetails: MixedType = {
+//   title: "Bible",
+//   pageCount: 350,
+// };
 
 // Generics
 
@@ -99,15 +99,15 @@ const bookDetails: MixedType = {
 
 //  Створіть загальну функцію reverse, яка приймає масив будь-якого типу і повертає масив у зворотньому порядку.
 
-// function reverse<K>(items: K[]): K[] {
-//   return items.reverse();
-// }
+function reverse<K>(items: K[]): K[] {
+  return items.reverse();
+}
 
-// let numbers = reverse<number>([1, 2, 3, 4, 5]);
-// console.log(numbers); // [5, 4, 3, 2, 1]
+let numbers = reverse<number>([1, 2, 3, 4, 5]);
+console.log(numbers); // [5, 4, 3, 2, 1]
 
-// let strings = reverse<string>(["a", "b", "c", "d"]);
-// console.log(strings); // ["d", "c", "b", "a"]
+let strings = reverse<string>(["a", "b", "c", "d"]);
+console.log(strings); // ["d", "c", "b", "a"]
 
 // let i const - звертаємся по назві змінної
 // <> - звертаємося по назві дженерика
