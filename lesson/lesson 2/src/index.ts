@@ -13,7 +13,7 @@
 // type FrozenGoods = {
 //   iceCream: number;
 //   fish: number;
-//   berry: number; 
+//   berry: number;
 // };
 
 // const fruits: Goods = {
@@ -99,15 +99,15 @@
 
 //  Створіть загальну функцію reverse, яка приймає масив будь-якого типу і повертає масив у зворотньому порядку.
 
-function reverse<K>(items: K[]): K[] {
-  return items.reverse();
-}
+// function reverse<K>(items: K[]): K[] {
+//   return items.reverse();
+// }
 
-let numbers = reverse<number>([1, 2, 3, 4, 5]);
-console.log(numbers); // [5, 4, 3, 2, 1]
+// let numbers = reverse<number>([1, 2, 3, 4, 5]);
+// console.log(numbers); // [5, 4, 3, 2, 1]
 
-let strings = reverse<string>(["a", "b", "c", "d"]);
-console.log(strings); // ["d", "c", "b", "a"]
+// let strings = reverse<string>(["a", "b", "c", "d"]);
+// console.log(strings); // ["d", "c", "b", "a"]
 
 // let i const - звертаємся по назві змінної
 // <> - звертаємося по назві дженерика
@@ -121,33 +121,33 @@ console.log(strings); // ["d", "c", "b", "a"]
 // lengthOfObject({ name: "Earth", duration: 10 }); // 10
 
 // type obj = {
-// name: string
-//   length: number
-// }
+//   name: string;
+//   length: number;
+// };
 
 // Створіть загальну функцію getProperty, яка приймає об'єкт та ключ як рядок.
 // Функція повинна повертати значення цього ключа з об'єкта.
 
-// const student = {
-//   name: "John",
-//   age: 25,
-//   groupNumber: 12,
-// };
+const student = {
+  name: "John",
+  age: 25,
+  groupNumber: 12,
+};
 
-// // type Student = {
-// //   name: string;
-// //   age: number;
-// // };
+type Student = {
+  name: string;
+  age: number;
+};
 
-// function getProperty<ObjectType, KeyType extends keyof ObjectType>(obj: ObjectType, key: KeyType): ObjectType[KeyType] {
-//   return obj[key];
-// }
+function getProperty<ObjectType, KeyType extends keyof ObjectType>(obj: ObjectType, key: KeyType): ObjectType[KeyType] {
+  return obj[key];
+}
 
-// let studentName = getProperty(student, "name");
-// console.log(studentName); // "John"
+let studentName = getProperty(student, "name");
+console.log(studentName); // "John"
 
-// let studentAddress = getProperty(student, "address");
-// console.log(studentAddress); // undefined
+let studentAddress = getProperty(student, "address");
+console.log(studentAddress); // undefined
 
 // patrial <T>
 
