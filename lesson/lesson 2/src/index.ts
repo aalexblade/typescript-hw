@@ -128,28 +128,28 @@
 // Створіть загальну функцію getProperty, яка приймає об'єкт та ключ як рядок.
 // Функція повинна повертати значення цього ключа з об'єкта.
 
-const student = {
-  name: "John",
-  age: 25,
-  groupNumber: 12,
-};
+// const student = {
+//   name: "John",
+//   age: 25,
+//   groupNumber: 12,
+// };
 
-type Student = {
-  name: string;
-  age: number;
-};
+// type Student = {
+//   name: string;
+//   age: number;
+// };
 
-function getProperty<ObjectType, KeyType extends keyof ObjectType>(obj: ObjectType, key: KeyType): ObjectType[KeyType] {
-  return obj[key];
-}
+// function getProperty<ObjectType, KeyType extends keyof ObjectType>(obj: ObjectType, key: KeyType): ObjectType[KeyType] {
+//   return obj[key];
+// }
 
-let studentName = getProperty(student, "name");
-console.log(studentName); // "John"
+// let studentName = getProperty(student, "name");
+// console.log(studentName); // "John"
 
-let studentAddress = getProperty(student, "address");
-console.log(studentAddress); // undefined
+// let studentAddress = getProperty(student, "address");
+// console.log(studentAddress); // undefined
 
-// patrial <T>
+patrial <T>
 
 // type Todo = {
 //   title: string;
