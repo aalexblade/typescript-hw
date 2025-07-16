@@ -149,13 +149,13 @@
 // let studentAddress = getProperty(student, "address");
 // console.log(studentAddress); // undefined
 
-patrial <T>
+// patrial <T>
 
-// type Todo = {
-//   title: string;
-//   description: string;
-//   completed: boolean;
-// };
+type Todo = {
+  title: string;
+  description: string;
+  completed: boolean;
+};
 
 // function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>): Todo {
 //   return { ...todo, ...fieldsToUpdate };
