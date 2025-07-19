@@ -157,19 +157,19 @@ type Todo = {
   completed: boolean;
 };
 
-// function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>): Todo {
-//   return { ...todo, ...fieldsToUpdate };
-// }
+function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>): Todo {
+  return { ...todo, ...fieldsToUpdate };
+}
 
-// const todo1: Todo = {
-//   title: "Learn TypeScript",
-//   description: "Study the basics of TypeScript",
-//   completed: false,
-// };
+const todo1: Todo = {
+  title: "Learn TypeScript",
+  description: "Study the basics of TypeScript", 
+  completed: false,
+};
 
-// const todo2 = updateTodo(todo1, {
-//   description: "Study generics in TypeScript",
-// });
+const todo2 = updateTodo(todo1, {
+  description: "Study generics in TypeScript",
+});
 
 // console.log(todo2);
 
