@@ -19,7 +19,24 @@ type Form = {
 };
 
 // Реалізуйте Params так, щоб унеможливити поле 'errors' з типу Form
-type Params = Form;
+type Params = Omit<Form, 'errors'>;
+
+// Приклад використання:
+const validParams: Params = {
+  email: 'test@example.com',
+  firstName: 'John',
+  lastName: 'Doe',
+  phone: '1234567890',
+  // errors: {} // <-- Присвоєння 'errors' викличе помилку
+};
+
+// TypeScript автоматично виведе тип Params як:
+// {
+//   email: string | null;
+//   firstName: string | null;
+//   lastName: string | null;
+//   phone: string | null;
+// }
 
 export {};
 
