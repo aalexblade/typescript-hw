@@ -1,24 +1,41 @@
-interface User {
-  username: string;
-  age: number;
-  isActive: boolean;
-}
+// interface User {
+//   username: string;
+//   age: number;
+//   isActive: boolean;
+// }
 
-interface Admin extends User {
-  permissions: string[];
-}
+// interface Admin extends User {
+//   permissions: string[];
+// }
 
-let users: User[] = [
-  { username: "Vlad", age: 22, isActive: true },
-  { username: "Anna", age: 19, isActive: false },
-];
+// let users: User[] = [
+//   { username: "Vlad", age: 22, isActive: true },
+//   { username: "Anna", age: 19, isActive: false },
+// ];
 
-let superAdmin: Admin = {
-  username: "Oleh",
-  age: 30,
-  isActive: true,
-  permissions: ["manage-users", "edit-products"],
-};
-export {};
+// let superAdmin: Admin = {
+//   username: "Oleh",
+//   age: 30,
+//   isActive: true,
+//   permissions: ["manage-users", "edit-products"],
+// };
+// export {};
 
 // ========================================
+// Масив у useState
+
+// interface User {
+//   username: string;
+//   age: number;
+// }
+
+// const [user, setUser] = useState<User | null>(null);
+
+// interface User {
+//   udername:string;
+//   age:number;
+// }
+
+// const [users, setUsers] = useState<User[]>([]);
+
+// export{}
