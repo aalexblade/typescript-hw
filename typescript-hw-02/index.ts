@@ -1,39 +1,39 @@
 //  Основні типи
 // Прості типи
 
-let age: number = 27;
-let username: string = "Cooper";
-let isOnline: boolean = true;
+// let age: number = 27;
+// let username: string = "Cooper";
+// let isOnline: boolean = true;
 
 // ========================================
 // Масиви
 
-let numbers: number[] = [1, 2, 3, 4, 6];
-let names: string[] = ["Coorer", "Vlad", "Anna"];
+// let numbers: number[] = [1, 2, 3, 4, 6];
+// let names: string[] = ["Coorer", "Vlad", "Anna"];
 
 // =========================================
 // Об'єкти
 
-let User: { name: string; age: number } = {
-  name: "Rembo",
-  age: 49,
-};
+// let User: { name: string; age: number } = {
+//   name: "Rembo",
+//   age: 49,
+// };
 
 // =========================================
 // Any (краще уникати)
 
-let something: any = "Hello";
-something = 321;
+// let something: any = "Hello";
+// something = 321;
 
 // ==========================================
 // ==========================================
 // Функції
 
-function greet(name: string): string {
-  return `Hello, ${name}!`;
-}
+// function greet(name: string): string {
+//   return `Hello, ${name}!`;
+// }
 
-console.log(greet("Vlad"));
+// console.log(greet("Vlad"));
 
 // name: string — параметр з типом.
 // : string після дужок — тип повертаємого значення.
