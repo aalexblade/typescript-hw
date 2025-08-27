@@ -74,22 +74,21 @@
 // ============================================
 // Типізація класів
 
-// class Person {
-//   name:string;
-//   age:number;
+class Person {
+  name:string;
+  age:number;
 
-//   constructor(name:string, age:number){
-//     this.name=name;
-//     this.age=age
-//   }
-// }
+  constructor(name:string, age:number){
+    this.name=name;
+    this.age=age
+  }
 
-//   greet(): void {
-//     console.log(`Hi, my name is ${this.name}`);
-//   }
-// }
+  greet(): void {
+    console.log(`Hi, my name is ${this.name}`);
+  }
+}
 
-// const p1 = new Person('Cook', 32);
-// p1.greet(); // Hi, my name is Cook
+const p1 = new Person('Cook', 32);
+p1.greet(); // Hi, my name is Cook
 
 // ============================================
