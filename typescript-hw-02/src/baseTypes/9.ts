@@ -35,36 +35,36 @@
 
 // --- Початок файлу ---
 
-interface Page {
-  title: string;
-  readonly likes: number;
-  readonly accounts: ReadonlyArray<string>;
-  status: "open" | "closed";
-  details?: {
-    readonly createdAt: Date;
-    readonly updatedAt: Date;
-  };
-}
+// interface Page {
+//   title: string;
+//   readonly likes: number;
+//   readonly accounts: ReadonlyArray<string>;
+//   status: "open" | "closed";
+//   details?: {
+//     readonly createdAt: Date;
+//     readonly updatedAt: Date;
+//   };
+// }
 
-const page1: Page = {
-  title: "The awesome page",
-  likes: 100,
-  accounts: ["Max", "Anton", "Nikita"],
-  status: "open",
-  details: {
-    createdAt: new Date("2021-01-01T00:00:00Z"),
-    updatedAt: new Date("2021-05-01T12:00:00Z"),
-  },
-};
+// const page1: Page = {
+//   title: "The awesome page",
+//   likes: 100,
+//   accounts: ["Max", "Anton", "Nikita"],
+//   status: "open",
+//   details: {
+//     createdAt: new Date("2021-01-01T00:00:00Z"),
+//     updatedAt: new Date("2021-05-01T12:00:00Z"),
+//   },
+// };
 
-const page2: Page = {
-  title: "Python or Js",
-  likes: 5,
-  accounts: ["Alex"],
-  status: "closed",
-};
+// const page2: Page = {
+//   title: "Python or Js",
+//   likes: 5,
+//   accounts: ["Alex"],
+//   status: "closed",
+// };
 
-export {}; // Цей рядок може бути причиною, якщо ви очікуєте глобальної доступності
+// export {}; // Цей рядок може бути причиною, якщо ви очікуєте глобальної доступності
 
-// --- Кінець файлу ---
-export {};
+// // --- Кінець файлу ---
+// export {};
