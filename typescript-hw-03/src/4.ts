@@ -9,3 +9,27 @@
 
 
 // export {};
+
+class Key{
+    private signature: number;
+
+    constructor(){
+        this.signature= Math.random()
+    }
+
+    public getSignature():number{
+        return this.signature
+    }
+}
+
+class Person {
+  private key: Key;
+
+    constructor(key: Key) {
+        this.key = key;
+    }
+
+    public getKey():Key{
+        return this.key
+    }
+}
