@@ -33,3 +33,15 @@ class Person {
         return this.key
     }
 }
+
+abstract class House{
+    protected door: boolean = false;
+
+    protected key:Key;
+    protected tenants: Person[]=[];
+
+    constructor(key: Key){
+        this.key=key;
+    }
+}
+
