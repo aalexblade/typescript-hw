@@ -40,8 +40,7 @@ abstract class House{
     protected key:Key;
     protected tenants: Person[]=[];
 
-    constructor(key: Key){
-        this.key=key;
+
     }
 }
 
