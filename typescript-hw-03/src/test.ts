@@ -143,43 +143,168 @@ class AreaCalculator {
   }
 }
 
-
 // ============================= Ми могли б змінити клас AreaCalculator, щоб він міг обробляти кола, але це призведе до зміни вже наявного коду, що порушує принцип відкритості/закритості.
 
 // використовувати абстракцію та поліморфізм, щоб задовольнити цей принцип:
 
-interface Shape {
-    calculateArea(): number;
+// interface Shape {
+//     calculateArea(): number;
+// }
+
+// class Rectangle implements Shape {
+//     public width: number;
+//     public height: number;
+
+//     constructor(width: number, height: number) {
+//         this.width = width;
+//         this.height = height;
+//     }
+
+//     calculateArea(): number {
+//         return this.width * this.height;
+//     }
+// }
+
+// class Circle implements Shape {
+//     public radius: number;
+
+//     constructor(radius: number) {
+//         this.radius = radius;
+//     }
+
+//     calculateArea(): number {
+//         return Math.PI * Math.pow(this.radius, 2);
+//     }
+// }
+
+// class AreaCalculator {
+//     public calculate(shape: Shape): number {
+//         return shape.calculateArea();
+//     }
+// }
+
+// ======================Скорочений синтаксис для ініціалізації властивостей
+
+// У JavaScript ми маємо вручну оголосити властивості класу і потім ініціалізувати їх у конструкторі, ось приклад стандартного синтаксису в TypeScript:
+
+// class House {
+//   private type: string;
+//   private street: string;
+
+//   constructor(type: string, street: string) {
+//     this.type = type;
+//     this.street = street;
+//   }
+// }
+
+// Синтаксис TypeScript пропонує набагато елегантніший підхід. Замість окремого оголошення та ініціалізації властивостей ми можемо робити це прямо у списку параметрів конструктора:
+
+// class House{
+//   constructor(private type:string, street:string){}
+// }
+// export{}
+
+// ============Readonly
+
+// class House {
+//   constructor(private readonly type: string, private street: string) {}
+
+//   changeType(type: string) {
+//     this.type = type; // Помилка: Неможливо змінити властивість "type", оскільки вона "readonly".
+//   }
+// }
+
+// export {};
+
+// Однак важливо пам'ятати, що readonly робить об'єкти або масиви, пов'язані з властивістю, незмінними. Наприклад, якщо у вас є властивість, яка є масивом, і вона оголошена як readonly, ви все одно зможете додавати або видаляти елементи з цього масиву. Модифікатор readonly застосовується тільки до самої властивості, а не до об'єкта чи масиву, на який він посилається.
+
+// class House {
+//   constructor(public readonly tenants: string[]) {}
+
+//   addTenant(tenant: string) {
+//     this.tenants.push(tenant); // Не виникне жодних помилок, навіть якщо 'tenants' є 'readonly'.
+//   }
+// }
+
+// const house = new House([]);
+
+// house.addTenant('Alice');
+
+// console.log(house.tenants); // Виведе: ['Alice']
+
+// export {};
+
+// ======================Наслідування
+
+// class House {
+//   constructor(private readonly type: string, private street: string) {}
+// }
+
+// class StoneHouse extends House {
+//   constructor(street: string) {
+//     super('stone', street); // Виклик батьківського конструктора
+//   }
+// }
+
+// const stoneHouse = new StoneHouse('Stone-world');
+
+// export {};
+
+// super() викликає батьківський конструктор, і його потрібно викликати до будь-якої маніпуляції з this у конструкторі. У нашому прикладі ми створили підклас StoneHouse, який під час створення об'єкта прямо передає тип 'stone' у батьківський конструктор.
+
+// Тепер давайте детальніше розберемо тему перевизначення методів. Ми повернемо частину функціонала до нашого класу House, щоб код міг компілюватися без помилок.
+
+class House {
+  private tenants: string[] = [];
+
+  constructor(private readonly type: string, private street: string) {}
+
+  public showAddress(this: House) {
+    console.log('Address: ' + this.street);
+  }
+
+  public showType(this: House) {
+    console.log('House Type: ' + this.type);
+  }
+
+  public addTenant(tenant: string) {
+    this.tenants.push(tenant);
+  }
+
+  public showTenants() {
+    console.log(this.tenants);
+  }
 }
 
-class Rectangle implements Shape {
-    public width: number;
-    public height: number;
-    
-    constructor(width: number, height: number) {
-        this.width = width;
-        this.height = height;
-    }
+class StoneHouse extends House {
+  private chargeOfTheHouse: string; // Головний в домі
 
-    calculateArea(): number {
-        return this.width * this.height;
-    }
+  constructor(street: string, generalTenant: string) {
+    super('stone', street); // Виклик батьківського конструктора
+
+    // Додаємо власника квартири.
+
+    this.chargeOfTheHouse = generalTenant;
+
+    this.addTenant(generalTenant);
+  }
+
+  public showTenants() {
+    console.log('General: ' + this.chargeOfTheHouse);
+
+    // Запускаємо батьківський метод showTenants();
+
+    super.showTenants();
+  }
 }
 
-class Circle implements Shape {
-    public radius: number;
-    
-    constructor(radius: number) {
-        this.radius = radius;
-    }
+const stoneHouse = new StoneHouse('Stone-world', 'Max');
 
-    calculateArea(): number {
-        return Math.PI * Math.pow(this.radius, 2);
-    }
-}
+stoneHouse.addTenant('Anton');
+stoneHouse.addTenant('Nikita');
 
-class AreaCalculator {
-    public calculate(shape: Shape): number {
-        return shape.calculateArea();
-    }
-}
+stoneHouse.showTenants();
+stoneHouse.showType();
+stoneHouse.showAddress();
+
+export {};
