@@ -254,57 +254,157 @@ class AreaCalculator {
 
 // Тепер давайте детальніше розберемо тему перевизначення методів. Ми повернемо частину функціонала до нашого класу House, щоб код міг компілюватися без помилок.
 
-class House {
-  private tenants: string[] = [];
+// class House {
+//   private tenants: string[] = [];
 
-  constructor(private readonly type: string, private street: string) {}
+//   constructor(private readonly type: string, private street: string) {}
 
-  public showAddress(this: House) {
-    console.log('Address: ' + this.street);
+//   public showAddress(this: House) {
+//     console.log('Address: ' + this.street);
+//   }
+
+//   public showType(this: House) {
+//     console.log('House Type: ' + this.type);
+//   }
+
+//   public addTenant(tenant: string) {
+//     this.tenants.push(tenant);
+//   }
+
+//   public showTenants() {
+//     console.log(this.tenants);
+//   }
+// }
+
+// class StoneHouse extends House {
+//   private chargeOfTheHouse: string; // Головний в домі
+
+//   constructor(street: string, generalTenant: string) {
+//     super('stone', street); // Виклик батьківського конструктора
+
+//     // Додаємо власника квартири.
+
+//     this.chargeOfTheHouse = generalTenant;
+
+//     this.addTenant(generalTenant);
+//   }
+
+//   public showTenants() {
+//     console.log('General: ' + this.chargeOfTheHouse);
+
+//     // Запускаємо батьківський метод showTenants();
+
+//     super.showTenants();
+//   }
+// }
+
+// const stoneHouse = new StoneHouse('Stone-world', 'Max');
+
+// stoneHouse.addTenant('Anton');
+// stoneHouse.addTenant('Nikita');
+
+// stoneHouse.showTenants();
+// stoneHouse.showType();
+// stoneHouse.showAddress();
+
+// export {};
+
+// ===============================Getter/Setter
+
+// type PersonInformation = {
+//   firstName?: string;
+//   lastName?: string;
+// };
+
+// class Person {
+//   private personInfo: PersonInformation = {};
+
+//   set firstName(value: string) {
+//     console.log('firstName added');
+
+//     this.personInfo.firstName = value;
+//   }
+
+//   set lastName(value: string) {
+//     console.log('lastName added');
+
+//     this.personInfo.lastName = value;
+//   }
+
+//   get info() {
+//     const { personInfo } = this;
+
+//     return `${personInfo.lastName} ${personInfo.firstName}`;
+//   }
+// }
+
+// const person = new Person();
+
+// person.lastName = 'Pupkin'; // lastName added
+// person.firstName = 'Petha'; // firstName added
+
+// console.log(person.info); // Pupkin Petha
+
+// export {};
+
+// =========================Статичні методи та властивості
+
+// class UseStatic {
+//   private static count = 0;
+
+//   constructor() {
+//     UseStatic.count += 1;
+//   }
+
+//   public static itStaticMethod() {
+//     console.log('Run static method');
+//   }
+
+//   public showCount() {
+//     console.log(UseStatic.count);
+//   }
+// }
+
+// const obj1 = new UseStatic();
+// const obj2 = new UseStatic();
+// const obj3 = new UseStatic();
+
+// obj1.showCount(); // 3
+// obj2.showCount(); // 3
+// obj3.showCount(); // 3
+
+// UseStatic.itStaticMethod(); // Run static method
+
+// export {};
+
+// ===================================Abstract classes
+
+abstract class Plane {
+  protected pilotInCabin = false;
+
+  public sitInPlane() {
+    this.pilotInCabin = true;
   }
 
-  public showType(this: House) {
-    console.log('House Type: ' + this.type);
-  }
+  public abstract startEngine(): boolean;
+}
 
-  public addTenant(tenant: string) {
-    this.tenants.push(tenant);
-  }
+class Maize extends Plane {
+  public startEngine() {
+    // Запускаємо винти двигуна.
 
-  public showTenants() {
-    console.log(this.tenants);
+    return true;
   }
 }
 
-class StoneHouse extends House {
-  private chargeOfTheHouse: string; // Головний в домі
+class Boeing extends Plane {
+  public startEngine() {
+    // Розігріваємо реактивні турбіни.
 
-  constructor(street: string, generalTenant: string) {
-    super('stone', street); // Виклик батьківського конструктора
-
-    // Додаємо власника квартири.
-
-    this.chargeOfTheHouse = generalTenant;
-
-    this.addTenant(generalTenant);
-  }
-
-  public showTenants() {
-    console.log('General: ' + this.chargeOfTheHouse);
-
-    // Запускаємо батьківський метод showTenants();
-
-    super.showTenants();
+    return true;
   }
 }
 
-const stoneHouse = new StoneHouse('Stone-world', 'Max');
-
-stoneHouse.addTenant('Anton');
-stoneHouse.addTenant('Nikita');
-
-stoneHouse.showTenants();
-stoneHouse.showType();
-stoneHouse.showAddress();
+class BrokenPlane extends Plane {} // Error: Клас 'BrokenPlane' не реалізовує унаслідований абстрактний метод 'startEngine' з класу 'Plane'.
 
 export {};
