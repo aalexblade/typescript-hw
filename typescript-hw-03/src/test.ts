@@ -1,4 +1,4 @@
-// Інкапсуляція в об'єктно-орієнтованому програмуванні (ООП)
+// ==========================Інкапсуляція в об'єктно-орієнтованому програмуванні (ООП)
 
 import { server } from '../node_modules/typescript/lib/typescript';
 
@@ -379,32 +379,75 @@ class AreaCalculator {
 
 // ===================================Abstract classes
 
-abstract class Plane {
-  protected pilotInCabin = false;
+// abstract class Plane {
+//   protected pilotInCabin = false;
 
-  public sitInPlane() {
-    this.pilotInCabin = true;
-  }
+//   public sitInPlane() {
+//     this.pilotInCabin = true;
+//   }
 
-  public abstract startEngine(): boolean;
+//   public abstract startEngine(): boolean;
+// }
+
+// class Maize extends Plane {
+//   public startEngine() {
+//     // Запускаємо винти двигуна.
+
+//     return true;
+//   }
+// }
+
+// class Boeing extends Plane {
+//   public startEngine() {
+//     // Розігріваємо реактивні турбіни.
+
+//     return true;
+//   }
+// }
+
+// class BrokenPlane extends Plane {} // Error: Клас 'BrokenPlane' не реалізовує унаслідований абстрактний метод 'startEngine' з класу 'Plane'.
+
+// export {};
+
+// ======================Інтерфейси в TypeScript
+
+// interface Person {
+//   firstName: string;
+//   lastName: string;
+//   age?: number; // Необов'язкове поле
+// }
+
+// function greet(person: Person) {
+//   console.log(`Hello, ${person.firstName} ${person.lastName}`);
+// }
+
+// const john: Person = {
+//   firstName: 'John',
+//   lastName: 'Doe',
+// };
+
+// greet(john); // Виведе: "Hello, John Doe"
+
+// ===================Інтерфейси об'єктів
+
+interface IPerson {
+  name: string;
+  age: number;
+
+  greet(phrase: string): void;
 }
 
-class Maize extends Plane {
-  public startEngine() {
-    // Запускаємо винти двигуна.
+let user: IPerson;
 
-    return true;
+user = {
+  name: 'Anthony',
+  age: 21,
+
+  greet(phrase) {
+    console.log(phrase + ' ' + this.name );
   }
-}
+};
 
-class Boeing extends Plane {
-  public startEngine() {
-    // Розігріваємо реактивні турбіни.
 
-    return true;
-  }
-}
+user.greet('Вітання всім, я'); // Вітання всім, я Anthony
 
-class BrokenPlane extends Plane {} // Error: Клас 'BrokenPlane' не реалізовує унаслідований абстрактний метод 'startEngine' з класу 'Plane'.
-
-export {};
