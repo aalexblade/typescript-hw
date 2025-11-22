@@ -1,6 +1,9 @@
 // ==========================Інкапсуляція в об'єктно-орієнтованому програмуванні (ООП)
 
-import { server } from '../node_modules/typescript/lib/typescript';
+import {
+  server,
+  textChangeRangeIsUnchanged,
+} from '../node_modules/typescript/lib/typescript';
 
 class MyClass {
   private protectedMethod() {
@@ -430,24 +433,77 @@ class AreaCalculator {
 
 // ===================Інтерфейси об'єктів
 
-interface IPerson {
+// interface IPerson {
+//   name: string;
+//   age: number;
+
+//   greet(phrase: string): void;
+// }
+
+// let user: IPerson;
+
+// user = {
+//   name: 'Anthony',
+//   age: 21,
+
+//   greet(phrase) {
+//     console.log(phrase + ' ' + this.name );
+//   }
+// };
+
+// user.greet('Вітання всім, я'); // Вітання всім, я Anthony
+
+// ==================Уніфікована мова моделювання (UML) і шаблони проєктування
+
+// interface IPerson {
+//  name: string;
+//  age: number;
+//  greet(phrase: string): void;
+// }
+
+// class Person implements IPerson {
+//  constructor(public name: string, public age: number) {}
+
+//  greet(phrase: string): void {
+//   console.log(phrase + ', мене звати ' + this.name);
+//  }
+// }
+
+// let john = new Person('John', 25);
+// john.greet('Привіт');
+
+// =========================================== Залежність
+
+type ItemType = {
   name: string;
-  age: number;
-
-  greet(phrase: string): void;
-}
-
-let user: IPerson;
-
-user = {
-  name: 'Anthony',
-  age: 21,
-
-  greet(phrase) {
-    console.log(phrase + ' ' + this.name );
-  }
 };
 
+class Catalog {
+  showCatalog(items: ItemType[]) {
+    items.forEach((item) => {
+      console.log(item.name);
+    });
+  }
+}
 
-user.greet('Вітання всім, я'); // Вітання всім, я Anthony
+class Items {
+  private items: ItemType[] = [];
+  setItem(name: string) {
+    this.items.push({ name });
+  }
 
+  getItems(): ItemType[] {
+    return this.items;
+  }
+}
+
+const items = new Items();
+const catalog = new Catalog();
+
+items.setItem('Catalog 1');
+items.setItem('Catalog 2');
+items.setItem('Catalog 3');
+
+catalog.showCatalog(items.getItems());
+
+export {};
