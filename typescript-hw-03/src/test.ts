@@ -88,23 +88,23 @@ class classA {
 // ==============================Принципи ООП (S.O.L.I.D)
 
 // Невірно: клас робить занадто багато речей
-class User {
-  public name: string;
-  public email: string;
+// class User {
+//   public name: string;
+//   public email: string;
 
-  constructor(name: string, email: string) {
-    this.name = name;
-    this.email = email;
-  }
+//   constructor(name: string, email: string) {
+//     this.name = name;
+//     this.email = email;
+//   }
 
-  public save(): void {
-    // Логіка для збереження користувача в базі даних
-  }
+//   public save(): void {
+//     // Логіка для збереження користувача в базі даних
+//   }
 
-  public sendEmail(message: string): void {
-    // Логіка для відправки електронної пошти користувачу
-  }
-}
+//   public sendEmail(message: string): void {
+//     // Логіка для відправки електронної пошти користувачу
+//   }
+// }
 
 // Вірно: кожен клас виконує тільки одну задачу
 
@@ -557,23 +557,428 @@ class AreaCalculator {
 
 // =================================Композиція
 
-class Person {
-  constructor(public name: string) {}
+// class Person {
+//   constructor(public name: string) {}
+// }
+
+// class Home {
+//   private tenants: Person[] = [];
+
+//   addTenant(name: string) {
+//     const tenant = new Person(name);
+//     this.tenants.push(tenant);
+//   }
+// }
+
+// const home = new Home();
+
+// home.addTenant('Max');
+// home.addTenant('Anton');
+// home.addTenant('Nikita');
+
+// У цьому прикладі об'єкти Person створюються безпосередньо всередині методу addTenant класу Home, і без Home вони не можуть існувати. Це і є характерною рисою композиції: "частини" неспроможні існувати без "цілого".
+
+// ===========================Шаблони проєктування
+
+// Одинак (Singleton)
+
+class App {
+  private static instance: App;
+
+  constructor() {
+    if (!App.instance) {
+      App.instance = this;
+    }
+
+    return App.instance;
+  }
+
+  // ...
 }
 
-class Home {
-  private tenants: Person[] = [];
+export {};
 
-  addTenant(name: string) {
-    const tenant = new Person(name);
-    this.tenants.push(tenant);
+//  Фабрика (Factory)
+
+// Валідація платіжних даних.
+// Надсилання запиту на платіж.
+// Отримання та обробка відповіді.
+
+interface PaymentProcessor {
+  validate(data: any): boolean;
+  pay(amount: number): void;
+}
+
+class CreditCardProcessor implements PaymentProcessor {
+  validate(data: any): boolean {
+    // Валідація даних кредитної карти
+    return true;
+  }
+
+  pay(amount: number): void {
+    console.log(`Paid ${amount} using Credit Card.`);
   }
 }
 
-const home = new Home();
+class PayPalProcessor implements PaymentProcessor {
+  validate(data: any): boolean {
+    // Валідація даних PayPal
+    return true;
+  }
 
-home.addTenant('Max');
-home.addTenant('Anton');
-home.addTenant('Nikita');
+  pay(amount: number): void {
+    console.log(`Paid ${amount} using PayPal.`);
+  }
+}
 
-// У цьому прикладі об'єкти Person створюються безпосередньо всередині методу addTenant класу Home, і без Home вони не можуть існувати. Це і є характерною рисою композиції: "частини" неспроможні існувати без "цілого".
+class BitcoinProcessor implements PaymentProcessor {
+  validate(data: any): boolean {
+    // Валідація даних Bitcoin
+    return true;
+  }
+
+  pay(amount: number): void {
+    console.log(`Paid ${amount} using Bitcoin.`);
+  }
+}
+
+class PaymentProcessorFactory {
+  static createProcessor(type: string): PaymentProcessor {
+    switch (type) {
+      case 'CreditCard':
+        return new CreditCardProcessor();
+      case 'PayPal':
+        return new PayPalProcessor();
+      case 'Bitcoin':
+        return new BitcoinProcessor();
+      default:
+        throw new Error(`Payment method ${type} is not supported.`);
+    }
+  }
+}
+
+// Використання
+const processor = PaymentProcessorFactory.createProcessor('CreditCard');
+processor.pay(100);
+
+export {};
+
+// Будівельник (Builder)
+//  — це шаблон проєктування, який використовується для створення складних об'єктів крок за кроком. Він дозволяє вам виробляти різні типи об'єктів, використовуючи той самий процес будівництва.
+
+class Car {
+  constructor(
+    public model: string,
+
+    public year: number,
+
+    public color: string
+  ) {}
+}
+
+class CarBuilder {
+  private model: string;
+
+  private year: number;
+
+  private color: string;
+
+  setModel(model: string): CarBuilder {
+    this.model = model;
+
+    return this;
+  }
+
+  setYear(year: number): CarBuilder {
+    this.year = year;
+
+    return this;
+  }
+
+  setColor(color: string): CarBuilder {
+    this.color = color;
+
+    return this;
+  }
+
+  build(): Car {
+    return new Car(this.model, this.year, this.color);
+  }
+}
+
+const builder = new CarBuilder();
+
+const car = builder
+  .setModel('Tesla Model S')
+  .setYear(2023)
+  .setColor('Red')
+  .build();
+
+console.log(car); // Car {model: "Tesla Model S", year: 2023, color: "Red"}
+
+export {};
+
+
+//  ====================================Адаптер (Adapter)
+// — це структурний шаблон проєктування, що дозволяє об'єктам із несумісними інтерфейсами працювати разом. Адаптер обертає один з об'єктів, щоб привести його інтерфейс до іншого.
+
+// Старий, несумісний інтерфейс
+class OldService {
+  public oldRequest(): string {
+    return 'Old Service Request';
+  }
+}
+
+// Новий інтерфейс
+interface NewInterface {
+  request(): string;
+}
+
+// Адаптер, який перетворює старий інтерфейс на новий
+class Adapter implements NewInterface {
+  constructor(private oldService: OldService) {}
+
+  public request(): string {
+    const result = this.oldService.oldRequest();
+
+    return `Adapter: (TRANSLATED) ${result}`;
+  }
+}
+
+// Клієнтський код, що працює з новим інтерфейсом
+class Client {
+  constructor(private newInterface: NewInterface) {}
+
+  public useService(): void {
+    console.log(this.newInterface.request());
+  }
+}
+
+const oldService = new OldService();
+const adapter = new Adapter(oldService);
+const client = new Client(adapter);
+
+client.useService(); // Вивід: Adapter: (TRANSLATED) Old Service Request
+
+export {};
+
+//  =====================================Декоратор (Decorator)
+// Декоратор (Decorator) — це структурний шаблон проєктування, що дозволяє додавати нові поведінки чи функціональності об'єктам, змінюючи їхню структуру.
+
+interface Coffee {
+  cost(): number;
+  description(): string;
+}
+
+class SimpleCoffee implements Coffee {
+  cost() {
+    return 10;
+  }
+
+  description() {
+    return 'Simple coffee';
+  }
+}
+
+class CoffeeDecorator implements Coffee {
+  constructor(protected coffee: Coffee) {}
+
+  cost() {
+    return this.coffee.cost();
+  }
+
+  description() {
+    return this.coffee.description();
+  }
+}
+
+class MilkDecorator extends CoffeeDecorator {
+  cost() {
+    return this.coffee.cost() + 2;
+  }
+
+  description() {
+    return this.coffee.description() + ', milk';
+  }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+  cost() {
+    return this.coffee.cost() + 1;
+  }
+
+  description() {
+    return this.coffee.description() + ', sugar';
+  }
+}
+
+// Клиентский код
+let coffee: Coffee = new SimpleCoffee();
+coffee = new MilkDecorator(coffee);
+coffee = new SugarDecorator(coffee);
+
+console.log(`${coffee.description()} - ${coffee.cost()} dollars`); // Simple coffee, milk, sugar - 13 dollars
+
+export {};
+
+// ====================================Фасад (Facade)
+// — це структурний шаблон проєктування, який надає спрощений інтерфейс до складної системи класів, бібліотеки або фреймворку.
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+type Address = {
+  userId: number;
+  street: string;
+  city: string;
+  country: string;
+};
+
+type PaymentData = {
+  userId: number;
+  cardNumber: string;
+  expiryDate: string;
+};
+
+class UserService {
+  getUser(id: number): User {
+    // Тут буде реалізація методу отримання інформації про користувача.
+    console.log(`Fetching user data for userId: ${id}`);
+    return { id, name: 'John Doe', email: 'john.doe@example.com' };
+  }
+
+  updateUser(user: User): void {
+    // Тут буде реалізація методу оновлення інформації користувача.
+    console.log(`Updating user: ${JSON.stringify(user)}`);
+  }
+}
+
+class AddressService {
+  getAddresses(userId: number): Address[] {
+    // Тут буде реалізація методу отримання адрес користувача.
+    console.log(`Fetching addresses for userId: ${userId}`);
+    return [{ userId, street: '123 Street', city: 'City', country: 'Country' }];
+  }
+
+  updateAddress(userId: number, address: Address): void {
+    // Тут буде реалізація методу оновлення адреси користувача.
+    console.log(`Updating address for userId: ${userId}`);
+  }
+}
+
+class PaymentService {
+  getPaymentData(userId: number): PaymentData {
+    // Тут буде реалізація методу отримання платіжних даних користувача.
+    console.log(`Fetching payment data for userId: ${userId}`);
+    return { userId, cardNumber: '1234 5678 9012 3456', expiryDate: '01/25' };
+  }
+
+  updatePaymentData(userId: number, paymentData: PaymentData): void {
+    // Тут буде реалізація методу оновлення платіжних даних користувача.
+    console.log(`Updating payment data for userId: ${userId}`);
+  }
+}
+
+class UserProfileFacade {
+  constructor(
+    private userService: UserService,
+    private addressService: AddressService,
+    private paymentService: PaymentService
+  ) {}
+
+  getUserProfile(userId: number): User {
+    const user = this.userService.getUser(userId);
+    user['addresses'] = this.addressService.getAddresses(userId);
+    user['paymentData'] = this.paymentService.getPaymentData(userId);
+    return user;
+  }
+
+  updateUserProfile(
+    userId: number,
+    userData: User,
+    address: Address,
+    paymentData: PaymentData
+  ): void {
+    this.userService.updateUser(userData);
+    this.addressService.updateAddress(userId, address);
+    this.paymentService.updatePaymentData(userId, paymentData);
+  }
+}
+
+export {};
+
+//========================================== Стан (State)
+//  — це поведінковий шаблон проєктування, який дозволяє об'єктам змінювати поведінку, залежно від свого стану. Зовні це виглядає так, начебто об'єкт змінює свій клас.
+
+interface State {
+  proceedToNext(order: Order): void;
+  toString(): string;
+}
+
+class Order {
+  private state: State;
+
+  constructor() {
+    this.state = new PendingState();
+  }
+
+  public proceedToNext() {
+    this.state.proceedToNext(this);
+  }
+
+  public setState(state: State) {
+    this.state = state;
+  }
+
+  public toString(): string {
+    return this.state.toString();
+  }
+}
+
+class PendingState implements State {
+  public proceedToNext(order: Order): void {
+    console.log('Proceeding from Pending to Shipped...');
+    order.setState(new ShippedState());
+  }
+
+  public toString(): string {
+    return 'Pending';
+  }
+}
+
+class ShippedState implements State {
+  public proceedToNext(order: Order): void {
+    console.log('Proceeding from Shipped to Delivered...');
+    order.setState(new DeliveredState());
+  }
+
+  public toString(): string {
+    return 'Shipped';
+  }
+}
+
+class DeliveredState implements State {
+  public proceedToNext(order: Order): void {
+    console.log('Already delivered. Thank you!');
+  }
+
+  public toString(): string {
+    return 'Delivered';
+  }
+}
+
+let order = new Order();
+console.log(order.toString()); // Output: Pending
+
+order.proceedToNext();
+console.log(order.toString()); // Output: Shipped
+
+order.proceedToNext();
+console.log(order.toString()); // Output: Delivered
+
+order.proceedToNext(); // Output: Already delivered. Thank you!
+
+export {};
