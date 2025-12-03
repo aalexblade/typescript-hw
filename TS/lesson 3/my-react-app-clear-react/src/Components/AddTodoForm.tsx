@@ -14,12 +14,15 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ onAdd }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form 
+    onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="New todo"
         value={newTodo}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => setNewTodo(e.target.value)}
+        onChange={
+          (e: ChangeEvent<HTMLInputElement>) => setNewTodo(e.target.value)
+        }
       />
       <button type="submit">Add</button>
     </form>
