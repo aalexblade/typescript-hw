@@ -42,7 +42,6 @@ export function Observer({ children, onContentEndVisible }: Props) {
   return (
     <div>
       {children}
-      {/* endContentRef використовується тут */}
       <div ref={endContentRef} />
     </div>
   );
