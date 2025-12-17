@@ -92,21 +92,21 @@
 //   };
 // }
 
-// type Car = {
-//   color: string;
-//   price: number;
-//   currency: string;
-//   start: (color: string) => {};
-// };
+type Car = {
+  color: string;
+  price: number;
+  currency: string;
+  start: (color: string) => {};
+};
 
-// const Car = {
-//   color: "red",
-//   price: 1000,
-//   currency: "UAH",
-//   start(color) {
-//     console.log("Start" + this.color);
-//   },
-// };
+const Car = {
+  color: "red",
+  price: 1000,
+  currency: "UAH",
+  start(color) {
+    console.log("Start" + this.color);
+  },
+};
 
 type User = {
   name: string;
