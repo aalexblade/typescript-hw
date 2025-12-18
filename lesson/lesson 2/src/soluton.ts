@@ -223,16 +223,16 @@
 
 // 2
 
-// interface StudentData {
-//   name: string;
-//   studentID: number;
-//   major: string;
-// }
+interface StudentData {
+  name: string;
+  studentID: number;
+  major: string;
+}
 
-// class Student implements StudentData {
-//   constructor(public name: string, public studentID: number, public major: string) {}
+class Student implements StudentData {
+  constructor(public name: string, public studentID: number, public major: string) {}
 
-//   introduce() {
-//     console.log(`Hello, my name is ${this.name}. My student ID is ${this.studentID} and I study ${this.major}.`);
-//   }
-// }
+  introduce() {
+    console.log(`Hello, my name is ${this.name}. My student ID is ${this.studentID} and I study ${this.major}.`);
+  }
+}
