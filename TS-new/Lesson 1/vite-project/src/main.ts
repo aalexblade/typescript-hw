@@ -135,14 +135,14 @@ import "./style.css";
 
 // errorHandler("Critical error occurred!");  // Throws an Error with the provided message
 
-interface User {
-  name: string;
-  age: number;
-  lastName?: string;
-  sayHello(): string;
-  sayBye(): void;
-  showAge(userAge: number): string;
-}
+// interface User {
+//   name: string;
+//   age: number;
+//   lastName?: string;
+//   sayHello(): string;
+//   sayBye(): void;
+//   showAge(userAge: number): string;
+// }
 
 // type User = {
 //   name: string;
@@ -163,16 +163,16 @@ interface User {
 //   },
 // };
 
-const student : User = {
-  name: "Bob",
-  age: 12,
-  sayHello() {
-    return "Hello";
-  },
-  sayBye() {
-    console.log("Bye");
-  },
-  showAge(userAge) {
-    return `My age is ${userAge}`;
-  },
-};
+// const student : User = {
+//   name: "Bob",
+//   age: 12,
+//   sayHello() {
+//     return "Hello";
+//   },
+//   sayBye() {
+//     console.log("Bye");
+//   },
+//   showAge(userAge) {
+//     return `My age is ${userAge}`;
+//   },
+// };
