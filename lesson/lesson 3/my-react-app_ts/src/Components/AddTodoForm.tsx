@@ -12,17 +12,17 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd }) => {
     setNewTodo("");
   };
 
-//   return (
-//     <div>
-//       <input
-//         type="text"
-//         placeholder="New todo"
-//         value={newTodo}
-//         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTodo(e.target.value)}
-//       />
-//       <button onClick={handleAddClick}>Add</button>
-//     </div>
-//   );
-// };
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="New todo"
+        value={newTodo}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTodo(e.target.value)}
+      />
+      <button onClick={handleAddClick}>Add</button>
+    </div>
+  );
+};
 
 export default AddTodoForm;
