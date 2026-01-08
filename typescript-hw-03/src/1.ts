@@ -20,15 +20,15 @@
 
 // ====================================================
 
-class Student {
-  // TypeScript автоматично створить і проініціалізує властивості
-  constructor(public name: string, public age: number, public grade: string) {
-    // Тіло конструктора залишається пустим
-  }
-}
+// class Student {
+//   // TypeScript автоматично створить і проініціалізує властивості
+//   constructor(public name: string, public age: number, public grade: string) {
+//     // Тіло конструктора залишається пустим
+//   }
+// }
 
-const student1 = new Student('Ivan', 20, 'A');
+// const student1 = new Student('Ivan', 20, 'A');
 
-console.log(student1.name);
-console.log(student1.age);
-console.log(student1.grade);
+// console.log(student1.name);
+// console.log(student1.age);
+// console.log(student1.grade);
