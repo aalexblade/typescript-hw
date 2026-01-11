@@ -130,21 +130,21 @@ class classA {
 
 // ==========================OCP (Open/closed principle) - Принцип відкритості/закритості
 
-class Rectangle {
-  public width: number;
-  public height: number;
+// class Rectangle {
+//   public width: number;
+//   public height: number;
 
-  constructor(width: number, height: number) {
-    this.width = width;
-    this.height = height;
-  }
-}
+//   constructor(width: number, height: number) {
+//     this.width = width;
+//     this.height = height;
+//   }
+// }
 
-class AreaCalculator {
-  public calculate(rectangle: Rectangle): number {
-    return rectangle.width * rectangle.height;
-  }
-}
+// class AreaCalculator {
+//   public calculate(rectangle: Rectangle): number {
+//     return rectangle.width * rectangle.height;
+//   }
+// }
 
 // ============================= Ми могли б змінити клас AreaCalculator, щоб він міг обробляти кола, але це призведе до зміни вже наявного коду, що порушує принцип відкритості/закритості.
 
@@ -765,150 +765,150 @@ export {};
 //  =====================================Декоратор (Decorator)
 // Декоратор (Decorator) — це структурний шаблон проєктування, що дозволяє додавати нові поведінки чи функціональності об'єктам, змінюючи їхню структуру.
 
-interface Coffee {
-  cost(): number;
-  description(): string;
-}
+// interface Coffee {
+//   cost(): number;
+//   description(): string;
+// }
 
-class SimpleCoffee implements Coffee {
-  cost() {
-    return 10;
-  }
+// class SimpleCoffee implements Coffee {
+//   cost() {
+//     return 10;
+//   }
 
-  description() {
-    return 'Simple coffee';
-  }
-}
+//   description() {
+//     return 'Simple coffee';
+//   }
+// }
 
-class CoffeeDecorator implements Coffee {
-  constructor(protected coffee: Coffee) {}
+// class CoffeeDecorator implements Coffee {
+//   constructor(protected coffee: Coffee) {}
 
-  cost() {
-    return this.coffee.cost();
-  }
+//   cost() {
+//     return this.coffee.cost();
+//   }
 
-  description() {
-    return this.coffee.description();
-  }
-}
+//   description() {
+//     return this.coffee.description();
+//   }
+// }
 
-class MilkDecorator extends CoffeeDecorator {
-  cost() {
-    return this.coffee.cost() + 2;
-  }
+// class MilkDecorator extends CoffeeDecorator {
+//   cost() {
+//     return this.coffee.cost() + 2;
+//   }
 
-  description() {
-    return this.coffee.description() + ', milk';
-  }
-}
+//   description() {
+//     return this.coffee.description() + ', milk';
+//   }
+// }
 
-class SugarDecorator extends CoffeeDecorator {
-  cost() {
-    return this.coffee.cost() + 1;
-  }
+// class SugarDecorator extends CoffeeDecorator {
+//   cost() {
+//     return this.coffee.cost() + 1;
+//   }
 
-  description() {
-    return this.coffee.description() + ', sugar';
-  }
-}
+//   description() {
+//     return this.coffee.description() + ', sugar';
+//   }
+// }
 
-// Клиентский код
-let coffee: Coffee = new SimpleCoffee();
-coffee = new MilkDecorator(coffee);
-coffee = new SugarDecorator(coffee);
+// // Клиентский код
+// let coffee: Coffee = new SimpleCoffee();
+// coffee = new MilkDecorator(coffee);
+// coffee = new SugarDecorator(coffee);
 
-console.log(`${coffee.description()} - ${coffee.cost()} dollars`); // Simple coffee, milk, sugar - 13 dollars
+// console.log(`${coffee.description()} - ${coffee.cost()} dollars`); // Simple coffee, milk, sugar - 13 dollars
 
-export {};
+// export {};
 
 // ====================================Фасад (Facade)
 // — це структурний шаблон проєктування, який надає спрощений інтерфейс до складної системи класів, бібліотеки або фреймворку.
 
-type User = {
-  id: number;
-  name: string;
-  email: string;
-};
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+// };
 
-type Address = {
-  userId: number;
-  street: string;
-  city: string;
-  country: string;
-};
+// type Address = {
+//   userId: number;
+//   street: string;
+//   city: string;
+//   country: string;
+// };
 
-type PaymentData = {
-  userId: number;
-  cardNumber: string;
-  expiryDate: string;
-};
+// type PaymentData = {
+//   userId: number;
+//   cardNumber: string;
+//   expiryDate: string;
+// };
 
-class UserService {
-  getUser(id: number): User {
-    // Тут буде реалізація методу отримання інформації про користувача.
-    console.log(`Fetching user data for userId: ${id}`);
-    return { id, name: 'John Doe', email: 'john.doe@example.com' };
-  }
+// class UserService {
+//   getUser(id: number): User {
+//     // Тут буде реалізація методу отримання інформації про користувача.
+//     console.log(`Fetching user data for userId: ${id}`);
+//     return { id, name: 'John Doe', email: 'john.doe@example.com' };
+//   }
 
-  updateUser(user: User): void {
-    // Тут буде реалізація методу оновлення інформації користувача.
-    console.log(`Updating user: ${JSON.stringify(user)}`);
-  }
-}
+//   updateUser(user: User): void {
+//     // Тут буде реалізація методу оновлення інформації користувача.
+//     console.log(`Updating user: ${JSON.stringify(user)}`);
+//   }
+// }
 
-class AddressService {
-  getAddresses(userId: number): Address[] {
-    // Тут буде реалізація методу отримання адрес користувача.
-    console.log(`Fetching addresses for userId: ${userId}`);
-    return [{ userId, street: '123 Street', city: 'City', country: 'Country' }];
-  }
+// class AddressService {
+//   getAddresses(userId: number): Address[] {
+//     // Тут буде реалізація методу отримання адрес користувача.
+//     console.log(`Fetching addresses for userId: ${userId}`);
+//     return [{ userId, street: '123 Street', city: 'City', country: 'Country' }];
+//   }
 
-  updateAddress(userId: number, address: Address): void {
-    // Тут буде реалізація методу оновлення адреси користувача.
-    console.log(`Updating address for userId: ${userId}`);
-  }
-}
+//   updateAddress(userId: number, address: Address): void {
+//     // Тут буде реалізація методу оновлення адреси користувача.
+//     console.log(`Updating address for userId: ${userId}`);
+//   }
+// }
 
-class PaymentService {
-  getPaymentData(userId: number): PaymentData {
-    // Тут буде реалізація методу отримання платіжних даних користувача.
-    console.log(`Fetching payment data for userId: ${userId}`);
-    return { userId, cardNumber: '1234 5678 9012 3456', expiryDate: '01/25' };
-  }
+// class PaymentService {
+//   getPaymentData(userId: number): PaymentData {
+//     // Тут буде реалізація методу отримання платіжних даних користувача.
+//     console.log(`Fetching payment data for userId: ${userId}`);
+//     return { userId, cardNumber: '1234 5678 9012 3456', expiryDate: '01/25' };
+//   }
 
-  updatePaymentData(userId: number, paymentData: PaymentData): void {
-    // Тут буде реалізація методу оновлення платіжних даних користувача.
-    console.log(`Updating payment data for userId: ${userId}`);
-  }
-}
+//   updatePaymentData(userId: number, paymentData: PaymentData): void {
+//     // Тут буде реалізація методу оновлення платіжних даних користувача.
+//     console.log(`Updating payment data for userId: ${userId}`);
+//   }
+// }
 
-class UserProfileFacade {
-  constructor(
-    private userService: UserService,
-    private addressService: AddressService,
-    private paymentService: PaymentService
-  ) {}
+// class UserProfileFacade {
+//   constructor(
+//     private userService: UserService,
+//     private addressService: AddressService,
+//     private paymentService: PaymentService
+//   ) {}
 
-  getUserProfile(userId: number): User {
-    const user = this.userService.getUser(userId);
-    user['addresses'] = this.addressService.getAddresses(userId);
-    user['paymentData'] = this.paymentService.getPaymentData(userId);
-    return user;
-  }
+//   getUserProfile(userId: number): User {
+//     const user = this.userService.getUser(userId);
+//     user['addresses'] = this.addressService.getAddresses(userId);
+//     user['paymentData'] = this.paymentService.getPaymentData(userId);
+//     return user;
+//   }
 
-  updateUserProfile(
-    userId: number,
-    userData: User,
-    address: Address,
-    paymentData: PaymentData
-  ): void {
-    this.userService.updateUser(userData);
-    this.addressService.updateAddress(userId, address);
-    this.paymentService.updatePaymentData(userId, paymentData);
-  }
-}
+//   updateUserProfile(
+//     userId: number,
+//     userData: User,
+//     address: Address,
+//     paymentData: PaymentData
+//   ): void {
+//     this.userService.updateUser(userData);
+//     this.addressService.updateAddress(userId, address);
+//     this.paymentService.updatePaymentData(userId, paymentData);
+//   }
+// }
 
-export {};
+// export {};
 
 //========================================== Стан (State)
 //  — це поведінковий шаблон проєктування, який дозволяє об'єктам змінювати поведінку, залежно від свого стану. Зовні це виглядає так, начебто об'єкт змінює свій клас.
