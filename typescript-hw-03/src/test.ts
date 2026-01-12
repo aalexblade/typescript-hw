@@ -765,61 +765,61 @@ export {};
 //  =====================================Декоратор (Decorator)
 // Декоратор (Decorator) — це структурний шаблон проєктування, що дозволяє додавати нові поведінки чи функціональності об'єктам, змінюючи їхню структуру.
 
-// interface Coffee {
-//   cost(): number;
-//   description(): string;
-// }
+interface Coffee {
+  cost(): number;
+  description(): string;
+}
 
-// class SimpleCoffee implements Coffee {
-//   cost() {
-//     return 10;
-//   }
+class SimpleCoffee implements Coffee {
+  cost() {
+    return 10;
+  }
 
-//   description() {
-//     return 'Simple coffee';
-//   }
-// }
+  description() {
+    return 'Simple coffee';
+  }
+}
 
-// class CoffeeDecorator implements Coffee {
-//   constructor(protected coffee: Coffee) {}
+class CoffeeDecorator implements Coffee {
+  constructor(protected coffee: Coffee) {}
 
-//   cost() {
-//     return this.coffee.cost();
-//   }
+  cost() {
+    return this.coffee.cost();
+  }
 
-//   description() {
-//     return this.coffee.description();
-//   }
-// }
+  description() {
+    return this.coffee.description();
+  }
+}
 
-// class MilkDecorator extends CoffeeDecorator {
-//   cost() {
-//     return this.coffee.cost() + 2;
-//   }
+class MilkDecorator extends CoffeeDecorator {
+  cost() {
+    return this.coffee.cost() + 2;
+  }
 
-//   description() {
-//     return this.coffee.description() + ', milk';
-//   }
-// }
+  description() {
+    return this.coffee.description() + ', milk';
+  }
+}
 
-// class SugarDecorator extends CoffeeDecorator {
-//   cost() {
-//     return this.coffee.cost() + 1;
-//   }
+class SugarDecorator extends CoffeeDecorator {
+  cost() {
+    return this.coffee.cost() + 1;
+  }
 
-//   description() {
-//     return this.coffee.description() + ', sugar';
-//   }
-// }
+  description() {
+    return this.coffee.description() + ', sugar';
+  }
+}
 
-// // Клиентский код
-// let coffee: Coffee = new SimpleCoffee();
-// coffee = new MilkDecorator(coffee);
-// coffee = new SugarDecorator(coffee);
+// Клиентский код
+let coffee: Coffee = new SimpleCoffee();
+coffee = new MilkDecorator(coffee);
+coffee = new SugarDecorator(coffee);
 
-// console.log(`${coffee.description()} - ${coffee.cost()} dollars`); // Simple coffee, milk, sugar - 13 dollars
+console.log(`${coffee.description()} - ${coffee.cost()} dollars`); // Simple coffee, milk, sugar - 13 dollars
 
-// export {};
+export {};
 
 // ====================================Фасад (Facade)
 // — це структурний шаблон проєктування, який надає спрощений інтерфейс до складної системи класів, бібліотеки або фреймворку.
