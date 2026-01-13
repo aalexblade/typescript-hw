@@ -92,35 +92,81 @@
 //   };
 // }
 
-type Car = {
-  color: string;
-  price: number;
-  currency: string;
-  start: (color: string) => {};
+// type Car = {
+//   color: string;
+//   price: number;
+//   currency: string;
+//   start: (color: string) => {};
+// };
+
+// const Car = {
+//   color: "red",
+//   price: 1000,
+//   currency: "UAH",
+//   start(color) {
+//     console.log("Start" + this.color);
+//   },
+// };
+
+// type User = {
+//   name: string;
+//   age: number;
+//   role?: string;
+// };
+
+// const user: User = {
+//   name: "bob",
+//   age: 12,
+// };
+
+// const admin: User = {
+//   name: "John",
+//   age: 23,
+//   role: "Admin",
+// };
+
+// =====================================
+
+// 1. Define a type for a Smartphone object
+type Smartphone = {
+  brand: string;
+  model: string;
+  storage: number;
+  batteryHealth: number;
+  // A method that takes a volume level and returns nothing (void)
+  setVolume: (level: number) => void;
 };
 
-const Car = {
-  color: "red",
-  price: 1000,
-  currency: "UAH",
-  start(color) {
-    console.log("Start" + this.color);
+// Create an object based on the Smartphone type
+const myPhone: Smartphone = {
+  brand: "Samsung",
+  model: "Galaxy S23",
+  storage: 256,
+  batteryHealth: 98,
+  setVolume(level) {
+    console.log(`Volume set to ${level}%`);
   },
 };
 
-type User = {
-  name: string;
-  age: number;
-  role?: string;
+// 2. Define a type for a Product with an optional field
+type Product = {
+  id: string;
+  title: string;
+  price: number;
+  discount?: number; // Optional field (can be undefined)
 };
 
-const user: User = {
-  name: "bob",
-  age: 12,
+// Standard product without a discount
+const laptop: Product = {
+  id: "abc-101",
+  title: "Work Laptop",
+  price: 1200,
 };
 
-const admin: User = {
-  name: "John",
-  age: 23,
-  role: "Admin",
+// Product with all fields included
+const tablet: Product = {
+  id: "xyz-202",
+  title: "Graphic Tablet",
+  price: 450,
+  discount: 15, // Discount applied
 };
