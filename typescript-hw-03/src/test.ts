@@ -1,19 +1,19 @@
 // ==========================Інкапсуляція в об'єктно-орієнтованому програмуванні (ООП)
 
-import {
-  server,
-  textChangeRangeIsUnchanged,
-} from '../node_modules/typescript/lib/typescript';
+// import {
+//   server,
+//   textChangeRangeIsUnchanged,
+// } from '../node_modules/typescript/lib/typescript';
 
-class MyClass {
-  private protectedMethod() {
-    return 'Something';
-  }
+// class MyClass {
+//   private protectedMethod() {
+//     return 'Something';
+//   }
 
-  public myPublicMethod() {
-    return this.protectedMethod();
-  }
-}
+//   public myPublicMethod() {
+//     return this.protectedMethod();
+//   }
+// }
 // ===================Інкапсуляцію на чистому JavaScript можна реалізувати ось так:
 function protectedMethod() {
   return 'Something';
