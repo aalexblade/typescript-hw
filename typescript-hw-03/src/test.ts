@@ -982,3 +982,68 @@ console.log(order.toString()); // Output: Delivered
 order.proceedToNext(); // Output: Already delivered. Thank you!
 
 export {};
+// =======================================================
+
+// Generics
+
+// Дженерики (Generics) — це одна з найпотужніших можливостей TypeScript. Якщо коротко: це спосіб створювати компоненти (функції, класи або інтерфейси), які можуть працювати з різними типами даних, але при цьому зберігати повну типову безпеку.
+
+// 1. Проблема: Чому не використовувати any?
+// Припустимо, нам потрібна функція, яка просто повертає те, що отримала на вхід.
+
+// Варіант з any (Погано):
+
+// function identity(arg: any): any {
+//   return arg;
+// }
+
+// let result = identity("Hello"); // TypeScript не знає, що result — це рядок. Він думає, що це any.
+
+// Ми втратили інформацію про тип. Якщо ми спробуємо викликати метод рядка, IDE нам не допоможе.
+
+// Варіант з Дженериком (Добре):
+
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let result = identity<string>("Hello"); // Тепер TypeScript точно знає, що result — це string.
+
+// Тут <T> — це заповнювач (placeholder). Коли ми викликаємо функцію, T стає string.
+
+// 2. Як це працює в інтерфейсах?
+// Це дуже корисно для обробки відповідей з сервера. Наприклад, у вас є стандартна структура відповіді, але дані (data) завжди різні.
+
+interface ApiResponse<T> {
+  status: number;
+  data: T; // Дані будуть того типу, який ми вкажемо
+}
+
+// Використання для користувача
+const userResponse: ApiResponse<{ name: string; age: number }> = {
+  status: 200,
+  data: { name: "Ivan", age: 25 }
+};
+
+// Використання для списку товарів
+const productResponse: ApiResponse<string[]> = {
+  status: 200,
+  data: ["Apple", "Banana", "Orange"]
+};
+
+// 3. Обмеження дженериків (Generic Constraints)
+// Іноді нам не потрібен «будь-який» тип. Нам потрібен тип, який має певні властивості (наприклад, властивість .length).
+
+// Ми можемо використати слово extends:
+
+interface Lengthwise {
+  length: number;
+}
+
+function logLength<T extends Lengthwise>(arg: T): void {
+  console.log(arg.length); // Тепер ми впевнені, що у T є властивість length
+}
+
+logLength("Hello");      // OK (рядок має length)
+logLength([1, 2, 3]);    // OK (масив має length)
+// logLength(10);        // Помилка! У числа немає властивості length
