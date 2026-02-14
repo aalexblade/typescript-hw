@@ -672,7 +672,7 @@ class Car {
 
     public year: number,
 
-    public color: string
+    public color: string,
   ) {}
 }
 
@@ -717,7 +717,6 @@ const car = builder
 console.log(car); // Car {model: "Tesla Model S", year: 2023, color: "Red"}
 
 export {};
-
 
 //  ====================================Адаптер (Adapter)
 // — це структурний шаблон проєктування, що дозволяє об'єктам із несумісними інтерфейсами працювати разом. Адаптер обертає один з об'єктів, щоб привести його інтерфейс до іншого.
@@ -1007,7 +1006,7 @@ function identity<T>(arg: T): T {
   return arg;
 }
 
-let result = identity<string>("Hello"); // Тепер TypeScript точно знає, що result — це string.
+let result = identity<string>('Hello'); // Тепер TypeScript точно знає, що result — це string.
 
 // Тут <T> — це заповнювач (placeholder). Коли ми викликаємо функцію, T стає string.
 
@@ -1022,13 +1021,13 @@ interface ApiResponse<T> {
 // Використання для користувача
 const userResponse: ApiResponse<{ name: string; age: number }> = {
   status: 200,
-  data: { name: "Ivan", age: 25 }
+  data: { name: 'Ivan', age: 25 },
 };
 
 // Використання для списку товарів
 const productResponse: ApiResponse<string[]> = {
   status: 200,
-  data: ["Apple", "Banana", "Orange"]
+  data: ['Apple', 'Banana', 'Orange'],
 };
 
 // 3. Обмеження дженериків (Generic Constraints)
@@ -1044,6 +1043,65 @@ function logLength<T extends Lengthwise>(arg: T): void {
   console.log(arg.length); // Тепер ми впевнені, що у T є властивість length
 }
 
-logLength("Hello");      // OK (рядок має length)
-logLength([1, 2, 3]);    // OK (масив має length)
+logLength('Hello'); // OK (рядок має length)
+logLength([1, 2, 3]); // OK (масив має length)
 // logLength(10);        // Помилка! У числа немає властивості length
+
+
+// =============================================================
+// Створюємо клас-сховище для різних типів даних:
+// Завдяки дженерикам нам не доведеться писати окремий клас для кожного випадку.
+// Реалізація класу DataStorage
+// Ось як виглядає цей "магічний" клас:
+
+// <T> — це наш заповнювач для типу.
+// Ми кажемо: "Цей клас буде працювати з типом T, який ми уточнимо пізніше".
+
+class DataStorage<T> {
+  private data: T[] = [];
+
+  // Додаємо елемент типу T
+  addItem(item: T): void {
+    this.data.push(item);
+  }
+
+  // Видаляємо елемент типу T
+  removeItem(item: T): void {
+    this.data = this.data.filter((i) => i !== item);
+  }
+
+  // Отримуємо всі елементи (повертає масив типу T)
+  getItems(): T[] {
+    return [...this.data]; // Повертаємо копію масиву
+  }
+}
+
+
+// Як це працює на практиці?
+// Тепер подивись, як один і той самий код адаптується під різні потреби:
+
+// 1. Сховище для тексту (рядків)
+
+const textStorage = new DataStorage<string>();
+
+textStorage.addItem("Купити молоко");
+textStorage.addItem("Вивчити TypeScript");
+// textStorage.addItem(42); // ❌ Помилка! TS знає, що тут мають бути лише рядки.
+
+// console.log(textStorage.getItems()); // ["Купити молоко", "Вивчити TypeScript"]
+
+// 2. Сховище для об'єктів (користувачів)
+
+interface UserBase {
+  id: number;
+  name: string;
+}
+
+// Помилка була тут: ти писав <User>, а треба <UserBase>
+const userStorage = new DataStorage<UserBase>(); 
+
+userStorage.addItem({ id: 1, name: "Олексій" });
+userStorage.addItem({ id: 2, name: "Марія" });
+
+const allUsers = userStorage.getItems();
+console.log(allUsers[0].name); // ✅ Тепер працює ідеально!
