@@ -1105,3 +1105,45 @@ userStorage.addItem({ id: 2, name: "Марія" });
 
 const allUsers = userStorage.getItems();
 console.log(allUsers[0].name); // ✅ Тепер працює ідеально!
+
+// =====================================================
+// функцію для пагінації або обгортки API-відповіді.
+
+// Створюємо дженерик-інтерфейс для відповіді
+interface ServerResponse<T> {
+  data: T;           // Тут будуть наші дані (тип уточнимо пізніше)
+  status: number;
+  message: string;
+}
+
+// 1. Описуємо типи для різних даних
+interface Product {
+  title: string;
+  price: number;
+}
+
+interface Order {
+  orderId: string;
+  amount: number;
+}
+
+// 2. Функція, яка "імітує" отримання даних (теж дженерик)
+function wrapInResponse<T>(payload: T): ServerResponse<T> {
+  return {
+    data: payload,
+    status: 200,
+    message: "Success"
+  };
+}
+
+// --- ВИКОРИСТАННЯ ---
+
+// Працюємо з товаром
+const product: Product = { title: "iPhone 15", price: 999 };
+const productRes = wrapInResponse<Product>(product);
+console.log(productRes.data.title); // TypeScript знає, що тут є title
+
+// Працюємо з замовленням
+// const order: Order = { orderId: "ORD-123", amount: 500 };
+// const orderRes = wrapInResponse<Order>(order);
+// console.log(orderRes.data.orderId); // TypeScript знає, що тут є orderId
