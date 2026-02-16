@@ -1057,54 +1057,54 @@ logLength([1, 2, 3]); // OK (масив має length)
 // <T> — це наш заповнювач для типу.
 // Ми кажемо: "Цей клас буде працювати з типом T, який ми уточнимо пізніше".
 
-class DataStorage<T> {
-  private data: T[] = [];
+// class DataStorage<T> {
+//   private data: T[] = [];
 
-  // Додаємо елемент типу T
-  addItem(item: T): void {
-    this.data.push(item);
-  }
+//   // Додаємо елемент типу T
+//   addItem(item: T): void {
+//     this.data.push(item);
+//   }
 
-  // Видаляємо елемент типу T
-  removeItem(item: T): void {
-    this.data = this.data.filter((i) => i !== item);
-  }
+//   // Видаляємо елемент типу T
+//   removeItem(item: T): void {
+//     this.data = this.data.filter((i) => i !== item);
+//   }
 
-  // Отримуємо всі елементи (повертає масив типу T)
-  getItems(): T[] {
-    return [...this.data]; // Повертаємо копію масиву
-  }
-}
+//   // Отримуємо всі елементи (повертає масив типу T)
+//   getItems(): T[] {
+//     return [...this.data]; // Повертаємо копію масиву
+//   }
+// }
 
 
-// Як це працює на практиці?
-// Тепер подивись, як один і той самий код адаптується під різні потреби:
+// // Як це працює на практиці?
+// // Тепер подивись, як один і той самий код адаптується під різні потреби:
 
-// 1. Сховище для тексту (рядків)
+// // 1. Сховище для тексту (рядків)
 
-const textStorage = new DataStorage<string>();
+// const textStorage = new DataStorage<string>();
 
-textStorage.addItem("Купити молоко");
-textStorage.addItem("Вивчити TypeScript");
-// textStorage.addItem(42); // ❌ Помилка! TS знає, що тут мають бути лише рядки.
+// textStorage.addItem("Купити молоко");
+// textStorage.addItem("Вивчити TypeScript");
+// // textStorage.addItem(42); // ❌ Помилка! TS знає, що тут мають бути лише рядки.
 
-// console.log(textStorage.getItems()); // ["Купити молоко", "Вивчити TypeScript"]
+// // console.log(textStorage.getItems()); // ["Купити молоко", "Вивчити TypeScript"]
 
-// 2. Сховище для об'єктів (користувачів)
+// // 2. Сховище для об'єктів (користувачів)
 
-interface UserBase {
-  id: number;
-  name: string;
-}
+// interface UserBase {
+//   id: number;
+//   name: string;
+// }
 
-// Помилка була тут: ти писав <User>, а треба <UserBase>
-const userStorage = new DataStorage<UserBase>(); 
+// // Помилка була тут: ти писав <User>, а треба <UserBase>
+// const userStorage = new DataStorage<UserBase>(); 
 
-userStorage.addItem({ id: 1, name: "Олексій" });
-userStorage.addItem({ id: 2, name: "Марія" });
+// userStorage.addItem({ id: 1, name: "Олексій" });
+// userStorage.addItem({ id: 2, name: "Марія" });
 
-const allUsers = userStorage.getItems();
-console.log(allUsers[0].name); // ✅ Тепер працює ідеально!
+// const allUsers = userStorage.getItems();
+// console.log(allUsers[0].name); // ✅ Тепер працює ідеально!
 
 // =====================================================
 // функцію для пагінації або обгортки API-відповіді.
@@ -1147,3 +1147,53 @@ console.log(productRes.data.title); // TypeScript знає, що тут є title
 // const order: Order = { orderId: "ORD-123", amount: 500 };
 // const orderRes = wrapInResponse<Order>(order);
 // console.log(orderRes.data.orderId); // TypeScript знає, що тут є orderId
+
+
+// ========================================================
+// Generic Constraints з використанням keyof
+
+class DataStorage<T> {
+  private data: T[] = [];
+
+  addItem(item: T): void {
+    this.data.push(item);
+  }
+
+  getItems(): T[] {
+    return [...this.data];
+  }
+
+  // НОВИЙ МЕТОД:
+  // K extends keyof T — це означає, що K може бути ТІЛЬКИ назвою властивості, яка є в T.
+  // Наприклад, для User це може бути тільки "id" або "name".
+  getItemProperty<K extends keyof T>(index: number, key: K): T[K] {
+    const item = this.data[index];
+    return item[key]; 
+  }
+}
+
+// === ВИКОРИСТАННЯ ===
+
+interface UserBase {
+  id: number;
+  name: string;
+}
+
+const userStorage = new DataStorage<UserBase>();
+userStorage.addItem({ id: 101, name: "Олексій" });
+
+// ✅ TypeScript підказує нам варіанти: "id" або "name"
+const userName = userStorage.getItemProperty(0, "name"); 
+const userId = userStorage.getItemProperty(0, "id");
+
+// ❌ Помилка: "age" не існує в UserBase
+// const userAge = userStorage.getItemProperty(0, "age"); 
+
+console.log(`Користувач: ${userName}, ID: ${userId}`);
+
+function getReadOnlyUsers(storage: DataStorage<UserBase>): ReadonlyArray<UserBase> {
+  return storage.getItems();
+}
+
+const users = getReadOnlyUsers(userStorage);
+// users[0].name = "Нове ім'я"; // ❌ Помилка! Масив тільки для читання.
