@@ -1172,28 +1172,3 @@ class DataStorage<T> {
   }
 }
 
-// === ВИКОРИСТАННЯ ===
-
-interface UserBase {
-  id: number;
-  name: string;
-}
-
-const userStorage = new DataStorage<UserBase>();
-userStorage.addItem({ id: 101, name: "Олексій" });
-
-// ✅ TypeScript підказує нам варіанти: "id" або "name"
-const userName = userStorage.getItemProperty(0, "name"); 
-const userId = userStorage.getItemProperty(0, "id");
-
-// ❌ Помилка: "age" не існує в UserBase
-// const userAge = userStorage.getItemProperty(0, "age"); 
-
-console.log(`Користувач: ${userName}, ID: ${userId}`);
-
-function getReadOnlyUsers(storage: DataStorage<UserBase>): ReadonlyArray<UserBase> {
-  return storage.getItems();
-}
-
-const users = getReadOnlyUsers(userStorage);
-// users[0].name = "Нове ім'я"; // ❌ Помилка! Масив тільки для читання.
