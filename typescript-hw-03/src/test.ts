@@ -1152,23 +1152,23 @@ console.log(productRes.data.title); // TypeScript знає, що тут є title
 // ========================================================
 // Generic Constraints з використанням keyof
 
-class DataStorage<T> {
-  private data: T[] = [];
+// class DataStorage<T> {
+//   private data: T[] = [];
 
-  addItem(item: T): void {
-    this.data.push(item);
-  }
+//   addItem(item: T): void {
+//     this.data.push(item);
+//   }
 
-  getItems(): T[] {
-    return [...this.data];
-  }
+//   getItems(): T[] {
+//     return [...this.data];
+//   }
 
-  // НОВИЙ МЕТОД:
-  // K extends keyof T — це означає, що K може бути ТІЛЬКИ назвою властивості, яка є в T.
-  // Наприклад, для User це може бути тільки "id" або "name".
-  getItemProperty<K extends keyof T>(index: number, key: K): T[K] {
-    const item = this.data[index];
-    return item[key]; 
-  }
-}
+//   // НОВИЙ МЕТОД:
+//   // K extends keyof T — це означає, що K може бути ТІЛЬКИ назвою властивості, яка є в T.
+//   // Наприклад, для User це може бути тільки "id" або "name".
+//   getItemProperty<K extends keyof T>(index: number, key: K): T[K] {
+//     const item = this.data[index];
+//     return item[key]; 
+//   }
+// }
 
