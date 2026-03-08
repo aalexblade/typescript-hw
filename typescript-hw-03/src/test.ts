@@ -15,15 +15,15 @@
 //   }
 // }
 // ===================Інкапсуляцію на чистому JavaScript можна реалізувати ось так:
-function protectedMethod() {
-  return 'Something';
-}
+// function protectedMethod() {
+//   return 'Something';
+// }
 
-class myClass {
-  myPublicMethod() {
-    return protectedMethod();
-  }
-}
+// class myClass {
+//   myPublicMethod() {
+//     return protectedMethod();
+//   }
+// }
 // ===================Наслідування
 
 class ClassA {
