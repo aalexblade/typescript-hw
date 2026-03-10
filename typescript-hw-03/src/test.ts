@@ -1172,3 +1172,42 @@ console.log(productRes.data.title); // TypeScript знає, що тут є title
 //   }
 // }
 
+// ==============================================
+interface Products {
+  id: number;
+  title: string;
+  price: number;
+  isAvailable: boolean;
+}
+
+/**
+ * Функція updateProperty приймає:
+ * T — тип самого об'єкта
+ * K — ключ, який ПОВИНЕН належати T (K extends keyof T)
+ * value — значення, яке ПОВИННО відповідати типу властивості T[K]
+ */
+function updateProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]): T {
+  return {
+    ...obj,
+    [key]: value
+  };
+}
+
+const myLaptop: Products = {
+  id: 1,
+  title: "MacBook Air",
+  price: 1000,
+  isAvailable: true
+};
+
+// ✅ ПРАВИЛЬНО: TypeScript знає, що 'price' — це число.
+const updatedLaptop = updateProperty(myLaptop, "price", 950);
+
+// ✅ ПРАВИЛЬНО: 'title' — це рядок.
+const renamedLaptop = updateProperty(myLaptop, "title", "MacBook Pro");
+
+// ❌ ПОМИЛКА: "discount" не існує в інтерфейсі Product.
+// updateProperty(myLaptop, "discount", 10); 
+
+// ❌ ПОМИЛКА: 'isAvailable' має бути boolean, а не string.
+// updateProperty(myLaptop, "isAvailable", "yes");
