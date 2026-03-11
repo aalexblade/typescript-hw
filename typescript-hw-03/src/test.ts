@@ -1211,3 +1211,42 @@ const renamedLaptop = updateProperty(myLaptop, "title", "MacBook Pro");
 
 // ❌ ПОМИЛКА: 'isAvailable' має бути boolean, а не string.
 // updateProperty(myLaptop, "isAvailable", "yes");
+
+// ================================
+
+/** 
+ * Злиття двох властивостей з об'єкта в новий об'єкт.
+ * T — тип вхідного об'єкта
+ * K1 та K2 — два різні ключі, які ОБОВ'ЯЗКОВО повинні бути в T
+ */
+function extractProperties<T, K1 extends keyof T, K2 extends keyof T>(
+  obj: T, 
+  key1: K1, 
+  key2: K2
+): { [P in K1 | K2]: T[P] } {
+  return {
+    [key1]: obj[key1],
+    [key2]: obj[key2]
+  } as { [P in K1 | K2]: T[P] };
+}
+
+interface UserProfile {
+  username: string;
+  email: string;
+  age: number;
+  isAdmin: boolean;
+}
+
+const user: UserProfile = {
+  username: "alex_dev",
+  email: "alex@example.com",
+  age: 28,
+  isAdmin: false
+};
+
+// TypeScript автоматично виводить: 
+// const shortInfo: { username: string; email: string; }
+const shortInfo = extractProperties(user, "username", "email");
+
+// ❌ ПОМИЛКА: "phone" не існує в UserProfile
+// const errorInfo = extractProperties(user, "username", "phone");
